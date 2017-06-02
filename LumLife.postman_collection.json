@@ -355,7 +355,7 @@
 					"response": []
 				},
 				{
-					"name": "Key-Auth for lumlife-goal copy",
+					"name": "Key-Auth for lumlife-logout",
 					"request": {
 						"url": "http://{{kong_host}}:{{kong_port}}/apis/lumlife-logout/plugins",
 						"method": "POST",
