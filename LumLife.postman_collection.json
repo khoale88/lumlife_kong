@@ -1,0 +1,706 @@
+{
+	"variables": [],
+	"info": {
+		"name": "LumLife",
+		"_postman_id": "d3e859ee-173c-5eb4-ff1d-207045d165e2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Kong",
+			"description": "",
+			"item": [
+				{
+					"name": "Kong test",
+					"request": {
+						"url": "localhost:8000/twilio/phoneNumbers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"value": "example.com",
+								"description": ""
+							},
+							{
+								"key": "apikey",
+								"value": "ENTER_KEY_HERE",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Kong Add API",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"lumlife-goals\",\n\t\"uris\":\"/goals\",\n\t\"upstream_url\":\"http://192.168.1.147:8080/goals\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Kong Del API",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/example-api",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Kong Get API",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Plugins Configure",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/lumlife-usersss/plugins",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"basic-auth\",\n\t\"config.hide_credentials\":\"true\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Kong Add Client",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/consumers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"Khoa\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Kong Client Add Key",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/consumers/Jason/key-auth/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"key\":\"ENTER_KEY_HERE_THIRD\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Kong Client Get Key",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/consumers/Jason/key-auth/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove User Key",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/consumers/{{lumlife_user_id}}/key-auth/{{lumlife_user_token}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "User Kong Info",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/consumers/{{lumlife_user_id}}",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kong Setup",
+			"description": "",
+			"item": [
+				{
+					"name": "Add API lumlife-goals",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"lumlife-goals\",\n\t\"uris\":\"/goals\",\n\t\"upstream_url\":\"http://192.168.1.147:8080/goals\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add API lumlife-goal",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"lumlife-goal\",\n\t\"uris\":\"/goal\",\n\t\"upstream_url\":\"http://192.168.1.147:8080/goal\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add API lumlife-users",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"lumlife-users\",\n\t\"uris\":\"/users\",\n\t\"upstream_url\":\"http://192.168.1.147:8080\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add API lumlife-logout",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"lumlife-logout\",\n\t\"uris\":\"/logout\",\n\t\"upstream_url\":\"http://192.168.1.147:8080/logout\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update API lumlife-goals",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"lumlife-goals\",\n\t\"uris\":\"/goals\",\n\t\"upstream_url\":\"http://192.168.1.147:8080/goals\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update API lumlife-goal",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"lumlife-goal\",\n\t\"uris\":\"/goal\",\n\t\"upstream_url\":\"http://192.168.1.147:8080/goal\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update API lumlife-users",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/lumlife-users",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"lumlife-users\",\n\t\"uris\":\"/users\",\n\t\"upstream_url\":\"http://192.168.1.147:8080\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Key-Auth for lumlife-goals",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/lumlife-goals/plugins",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"key-auth\",\n\t\"config.hide_credentials\":\"true\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Key-Auth for lumlife-goal",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/lumlife-goal/plugins",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"key-auth\",\n\t\"config.hide_credentials\":\"true\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Key-Auth for lumlife-goal copy",
+					"request": {
+						"url": "http://{{kong_host}}:{{kong_port}}/apis/lumlife-logout/plugins",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"key-auth\",\n\t\"config.hide_credentials\":\"true\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Protected",
+			"description": "",
+			"item": [
+				{
+					"name": "Access lumlife-goals",
+					"request": {
+						"url": "{{kong_gateway_host}}:{{kong_gateway_port}}/goals",
+						"method": "GET",
+						"header": [
+							{
+								"key": "apikey",
+								"value": "{{lumlife_user_token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Access lumlife-goal",
+					"request": {
+						"url": "{{kong_gateway_host}}:{{kong_gateway_port}}/goal",
+						"method": "GET",
+						"header": [
+							{
+								"key": "apikey",
+								"value": "{{lumlife_user_token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "User LogOut",
+					"request": {
+						"url": "{{kong_gateway_host}}:{{kong_gateway_port}}/logout",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Access-Token",
+								"value": "{{lumlife_user_token}}",
+								"description": ""
+							},
+							{
+								"key": "apikey",
+								"value": "{{lumlife_user_token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Twilio",
+			"description": "",
+			"item": [
+				{
+					"name": "add Twilio Number",
+					"request": {
+						"url": "{{twilio_host}}:{{twilio_port}}/twilio/addNumber",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Cong\",\n\t\"phoneNumber\":\"213-308-6747\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "update Twilio Number",
+					"request": {
+						"url": "{{twilio_host}}:{{twilio_port}}/twilio/updateNumber",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Cong\",\n\t\"phoneNumber\":\"213-308-6747\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get Twilio Numbers",
+					"request": {
+						"url": "{{twilio_host}}:{{twilio_port}}/twilio/phoneNumbers",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "remove Twilio Numbers",
+					"request": {
+						"url": "{{twilio_host}}:{{twilio_port}}/twilio/removeNumbers",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"names\":[\"Cong\"]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "send SMS to all",
+					"request": {
+						"url": "{{twilio_host}}:{{twilio_port}}/twilio/sendSMS-toAll",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\":\"Hi _user_, this is a test message is sent from sendSMS-toAll API\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "send SMS by name",
+					"request": {
+						"url": "{{twilio_host}}:{{twilio_port}}/twilio/sendSMS-byNames",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\":\"Hi _user_, this message is from sendSMS-byNames API\",\n\t\"names\":[\"Khoa\"]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "send SMS message to numbers",
+					"request": {
+						"url": "{{twilio_host}}:{{twilio_port}}//twilio/sendSMS",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\":\"Hello there :)\",\n\t\"numbers\":[\"+16692736755\", \"+12133086747\"]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "receive SMS",
+					"request": {
+						"url": "localhost:5000/twilio/receiveSMS",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "number",
+									"value": "+16692736755",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "message",
+									"value": "hey _user_, nice day!",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"description": "",
+			"item": [
+				{
+					"name": "User SignUp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = JSON.parse(responseBody);",
+									"if(\"id\" in response){",
+									"    postman.setGlobalVariable(\"lumlife_user_id\", response.id);",
+									"    postman.setGlobalVariable(\"lumlife_user_token\", response.access_token);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{kong_gateway_host}}:{{kong_gateway_port}}/users/signup",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"khoa14@gmail.com\",\n\t\"password\":\"Abcdefgh1!\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "User LogIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = JSON.parse(responseBody);",
+									"if(\"id\" in response){",
+									"    postman.setGlobalVariable(\"lumlife_user_id\", response.id);",
+									"    postman.setGlobalVariable(\"lumlife_user_token\", response.access_token);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{kong_gateway_host}}:{{kong_gateway_port}}/users/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"khoa14@gmail.com\",\n\t\"password\":\"Abcdefgh1!\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "User LogOut",
+					"request": {
+						"url": "{{kong_gateway_host}}:{{kong_gateway_port}}/logout",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Access-Token",
+								"value": "{{lumlife_user_token}}",
+								"description": ""
+							},
+							{
+								"key": "apikey",
+								"value": "{{lumlife_user_token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
